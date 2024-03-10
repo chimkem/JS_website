@@ -1,0 +1,91 @@
+/* Yleiset */
+html {
+    height: auto;
+}
+body {
+    font-family:'Montserrat', sans-serif;
+    background-image: linear-gradient(white, lightgreen);
+    background-size: cover;
+    height: auto;
+    background-attachment: fixed;
+}
+footer {
+    background-color: rgb(150, 105, 66);
+    color: whitesmoke;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    padding: 10px;
+    text-align: center;
+}
+
+/* header */
+@media (max-width: 700px) {
+    .headernav li {
+        display:inline-block;
+        text-align: center;
+      }
+    .logokuvake {
+        padding-right: 15px;
+        float: left;
+        width: auto;
+        height: 70px;
+    }
+}
+
+@media (min-width: 701px) {
+    .headernav li {
+        display:inline;
+        float: left;
+      }
+      .logokuvake {
+        padding-right: 15px;
+        float: left;
+        width: auto;
+        height: 50px;
+    }
+}
+
+.headernav {
+    background-color: rgb(150, 105, 66);
+    color: whitesmoke;
+    overflow: hidden;
+    padding: 10px 10px;
+}
+.headernav a {
+    display: block;
+    font-size: 20px;
+    padding: 10px;
+    text-decoration: none;
+    color: whitesmoke;
+}
+.headernav a:hover {
+    color: black;
+}
+.headernav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 1px;
+    overflow: hidden;
+}
+
+
+.tekstikentta {
+    padding: 5px;
+    width: 200px;
+    margin-bottom: 10px;
+    border-radius: 15px;
+}
+.valmis:checked + .tekstikentta {
+    background: white;
+    text-decoration: line-through;
+    border-radius: 15px;
+}
+#lisaa {
+    padding: 8px 14px;
+    border-radius: 15px;
+    font-weight: bold;
+    color: white;
+    background: green;
+    cursor: pointer;
+}
