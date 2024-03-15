@@ -23,7 +23,7 @@ function lisaa() {
     if (tehtavaInput.value !== '') {
         let li = document.createElement("li");
         li.innerHTML = tehtavaInput.value;
-
+        
         let tehtavapohja = document.getElementById('tehtavapohja');
         
         // Halusin lisätä nämä listaan siten, että uusin on korkeimpana.
@@ -77,12 +77,11 @@ listapohja.addEventListener('click', function(teht){
         teht.target.parentElement.remove();
         merkkiaani('gallery/audio/Wood.mp3')
         tallenna();
+        console.log("Tehtävä poistettu");
     }
 }, false);
 
 // Extra: Muokkaa tehtävää
-
-
 
 //--------
 // Extra
