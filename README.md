@@ -1,2 +1,1 @@
-Tämä ohjelmisto on luotu käyttämällä HTML, CSS ja JavaScriptiä.
-Nettisivu on toteutettu Laurean JavaScript-kurssin ensimmäistä tehtävää varten.
+Tämä nettisivu on toteutettu Laurean JavaScript-kurssin ensimmäistä tehtävää varten käyttämäen HTML, CSS ja JavaScriptiä.
