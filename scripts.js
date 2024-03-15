@@ -1,25 +1,6 @@
 const listapohja = document.getElementById('tehtavapohja');
 const tehtavaInput = document.getElementById('tehtava');
 
-// Kirjautumisnappi
-function login() {
-    alert("Jotain meni vikaan, yritä myöhemmin uudelleen!");
-}
-
-// Merkkiäänet, koska miksi ei
-function playSound() {
-    var sound = new Audio('/gallery/audio/Cartoon.mp3')
-    sound.loop = false;
-    sound.play();
-
-    
-}
-function playSound2() {
-    var metalli = new Audio('/gallery/audio/Metallic Clank.mp3')
-    metalli.loop = false;
-    metalli.play();
-}
-
 // To-Do
 
 // Lisää tehtävä
@@ -62,3 +43,27 @@ function tallenna() {
 
 }
 // Extra: Muokkaa tehtävää
+
+// Kirjautumisnappi
+function login() {
+    alert("Jotain meni vikaan, yritä myöhemmin uudelleen!");
+}
+
+// Merkkiäänet, koska miksi ei
+function playSound() {
+    var sound = new Audio('/gallery/audio/Cartoon.mp3')
+    sound.loop = false;
+    sound.play();
+
+    
+}
+function playSound2() {
+    var metalli = new Audio('/gallery/audio/Metallic Clank.mp3')
+    metalli.loop = false;
+    metalli.play();
+}
+
+function openMenu() {
+    var navbar = document.getElementById('navbar');
+    navbar.classList.toggle('show');
+}

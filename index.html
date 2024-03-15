@@ -18,8 +18,8 @@
 </head>
 <header>
     <nav> 
-        <img src="gallery/gilbert.png" alt="verkkosivun logo" class="logokuvake" onclick="playSound()">
-        <ul class="navi">
+        <img src="gallery/gilbert.png" alt="verkkosivun logo" class="logokuvake" id="ikoni" onclick="playSound(), openMenu()">
+        <ul class="navi" id="navbar">
             <li><a href="#Etusivu">Etusivut</a></li>
             <li><a href="#MatoMissio" class="aktiv">MatoMissio™</a></li> <!--Annetaan illuusio, että oltaisiin tällä sivulla-->
             <li><a href="#Foorumi">Foorumi</a></li>
@@ -39,7 +39,7 @@
         <div class="lista">
             <div class="rivi">
                 <input type="text" id="tehtava" placeholder="Anna tehtävä...">
-                <button id="addbtn" onclick="lisaa()">Lisää Listaan</button>
+                <button id="addbtn" onclick="lisaa()">Lisää</button>
             </div>
 
             <ul class="tpohja" id="tehtavapohja">

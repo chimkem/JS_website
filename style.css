@@ -24,8 +24,8 @@ body {
 }
 .info h1 {
     font-weight: bold;
-    font-size: 50px;
-    padding-top: 30px;
+    font-size: larger;
+    padding-top: 20px;
 }
 .lista {
     border: 2px solid #371f18;
@@ -38,27 +38,33 @@ body {
     overflow-y: auto;
     overflow-x: hidden;
 }
-/* Lisätään responsiivisuutta */
 
-@media (max-width: 700px) {
+
+/* Lisätään responsiivisuutta */
+@media (max-width: 769px) {
     nav li {
         display:inline-block;
         text-align: center;
       }
     .logokuvake {
-        margin-right: 10px;
         padding-left: 5px;
-        float: right;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
         width: auto;
-        height: 80px;
-        cursor: help;
+        height: 60px;
         transform: scaleX(-1);
     }
-    nav a {
+    nav .navi {
+        height: 80px;
+    }
+    .navi {
+        display: none;
+    }
+    nav .navi.show {
         display: block;
-        font-size: 20px;
-        padding-right: 10px;
-        text-decoration: none;
+        text-align: center;
+        font-size: 15px;
     }
     footer {
         font-size: 15px;
@@ -69,28 +75,32 @@ body {
     }
         
 }
-@media (min-width: 701px) {
+
+@media (min-width: 770px) {
     nav li {
         display:inline;
         float: left;
       }
-      .logokuvake {
+      
+    .logokuvake {
         padding-right: 15px;
         float: left;
         width: auto;
         height: 50px;
         cursor: help;
     }
+
     nav a {
         display: block;
         font-size: 20px;
         padding: 10px;
-        text-decoration: none;
     }
+
     .login   {
         float: right;
         padding: 5px;
     }
+
     .tpohja {
         height: 520px;
         max-height: 600px;
@@ -103,14 +113,18 @@ nav {
     padding: 10px 10px;
     border-bottom: 2px solid #371f18;
     background: #8b584a;
+    width: 100%;
 }
+
 nav a:hover {
     color: #371f18;
 }
+
 .aktiv {
     color: #371f18;
     font-weight: bold;
 }
+
 nav li {
     list-style-type: none;
     margin: 0;
@@ -124,7 +138,8 @@ nav li::before {
 }
 
 nav a {
-   color: #faf6f0;
+    text-decoration: none;
+    color: #faf6f0;
 }
 .btn {
     color: #faf6f0;
@@ -157,12 +172,14 @@ footer {
     justify-content: space-between;
     margin-bottom: 20px;
 }
+
 input {
     flex: 2;
     border: none;
     background: transparent;
     outline: none;
 }
+
 input::placeholder {
     color: #faf6f0;
 }
