@@ -37,12 +37,14 @@
         </div>
 
         <div class="lista">
-            <div class="inputrivi">
-                <input type="text" id="tehtava" placeholder="Anna tehtävä...">
-                <button class="btn" id="addbtn" onclick="lisaa()">Lisää</button>
+            <div class="tekstikentta">
+                <input type="text" id="tehtavanimi" placeholder="Anna tehtävä...">
+                <button class="btn" id="addbtn" onclick="uusiTehtava()">Lisää</button>
+                <button class="fbtn" id="forgorbtn" onclick="forgetMe()">❌</button>
             </div>
             <div class="tpohja">
-                <ul id="tehtavapohja"></ul>
+                <ul id="tehtavapohja">
+                </ul>
             </div>
         </div>
     </div>

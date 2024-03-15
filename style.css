@@ -29,7 +29,7 @@ body {
     border: 2px solid #371f18;
     background: linear-gradient(#dde8ae, #9bb83d);
     width: 90%;
-    height: 620px;
+    max-height: 650px;
     margin: 5px auto 10px;
     padding: 30px;
     border-radius: 30px;
@@ -86,6 +86,7 @@ body {
         float: left;
         width: auto;
         height: 50px;
+        cursor: not-allowed;
     }
 
     nav a {
@@ -147,12 +148,33 @@ nav a {
 .btn {
     color: #faf6f0;
     background-color: #4bb83d;
-    border-radius: 50px;
+    border-radius: 10px;
+    border-bottom: 2px solid #2a5724;
 }
 .btn:hover {
     color: #371f18;
     background-color: #ec7166;
+    border-radius: 10px;
+    border-bottom: 2px solid #371f18;;
+}
+
+.fbtn {
+    color: #371f18;
+    background-color: #ec7166;
     border-radius: 50px;
+    border: none;
+    width: 45px;
+    height: 40px;
+    margin-left: 5px;
+    border-bottom: 2px solid #371f18;
+}
+.fbtn:hover {
+    color: #faf6f0;
+    background-color: #371f18;
+    border-radius: 50px;
+    border: none;
+    width: 45px;
+    height: 40px;
 }
 
 /* Footeri */
@@ -168,11 +190,12 @@ footer {
 
 /*ToDo Tekstikenttä*/
 
-.inputrivi {
+.tekstikentta {
     display: flex;
     padding: 10px;
     background: #8b584a;
     border-radius: 20px;
+    border-bottom: 2px solid #371f18;
     align-items: center;
     justify-content: space-between;
     margin-bottom: 20px;

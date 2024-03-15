@@ -1,99 +1,135 @@
-const listapohja = document.getElementById('tehtavapohja');  // Pohja
-const tehtavaInput = document.getElementById('tehtava'); // Tekstikenttä
+// Katsotaan välimuisti
+let todo = JSON.parse(localStorage.getItem("MatoMissio")) || [];
 
-//---------------------
-// Selaimen välimuisti
-//---------------------
+// referoidaan DOM elementit
+const tehtavapohja = document.getElementById('tehtavapohja');  // Pohja
+const tehtavaInput = document.getElementById('tehtavanimi'); // Tekstikenttä
+const addBtn = document.querySelector(".btn");
 
-// Haetaan välimuisti
-function tehtavamuisti(){
-    listapohja.innerHTML = localStorage.getItem("ToDo");
-}
-// Tallennus välimuistiin
-function tallenna(){
-    localStorage.setItem("ToDo", tehtavapohja.innerHTML);
-}
+// ladataan aiemmat mahdolliset tehtävät
+window.onload = function() {
+    tuoTehtavat();
+};
 
 //----------------------------
-// Tehtävien lisäys ja poisto
+// ToDo Listan toiminta
 //----------------------------
 
-function lisaa() {
-    // Jos tehtäväkenttä ei ole tyhjä, lisätään tehtävä listaan.
-    if (tehtavaInput.value !== '') {
-        let li = document.createElement("li");
-        li.innerHTML = tehtavaInput.value;
-        
-        let tehtavapohja = document.getElementById('tehtavapohja');
-        
-        // Halusin lisätä nämä listaan siten, että uusin on korkeimpana.
-        if (tehtavapohja.firstChild) {
-            tehtavapohja.insertBefore(li, tehtavapohja.firstChild);
-        }
-        else {
-            tehtavapohja.appendChild(li);
-        }
-            
-        // lisätään perään ikoni poistamiselle
-        let del = document.createElement("span");
-        del.innerHTML = "❌";
-        li.appendChild(del);
+// Lisää Tehtävä listaan
+//----------------------------
+function uusiTehtava() {
+    const uusi = tehtavaInput.value.trim();
+    // Jos tehtäväkentässä on yli 3 kirjainta, lisätään tehtävä listaan.
+    if (uusi.length > 3) {
+        todo.push({
+            nimi: uusi,
+            ready: false
+        });
 
-        //Tyhjennetään tekstikenttä lähetyksen jälkeen ja logataan onnistuminen
-        tehtavaInput.value = '';
+        poistoNappi();
+        tehtavaInput.value = "";
         tallenna();
-        console.log("Tehtävä lisätty listaan");
+        console.log("Tehtävä lisätty");
     } 
-    // ... Muuten soitetaan äänimerkki ja lyödään punainen reuna tehtävälistan ympärille kahdeksi sekunniksi.
+    // ...Muuten soitetaan äänimerkki ja lyödään punainen reuna tehtävälistan ympärille kahdeksi sekunniksi.
     else {
         merkkiaani('/gallery/audio/Metallic.mp3');
-        tehtava.style.border = "1px solid #ec7166";
-        tehtava.style.borderRadius = "10px";
+            tehtavaInput.style.border = "1px solid #ec7166";
+            tehtavaInput.style.borderRadius = "10px";
 
         setTimeout(function() {
-            tehtava.style.border = "";
+            tehtavaInput.style.border = "";
         }, 2000);
 
-    // Tästäkin logit konsoliin
-        console.log("Tyhjä kenttä!");
+        console.error("Tyhjä kenttä tai liian lyhyt teksti!");
     }
 }
+// Tehtävien merkkaaminen ja poistaminen listalta
+//----------------------------
+tehtavapohja.addEventListener('click', function(event) {
+    const target = event.target;
 
+    if (target.tagName === "LI") {
+        // Merkataan onko tehtävä tehty, default=false
+        const listItem = target;
+        const index = Array.from(tehtavapohja.children).indexOf(listItem);
 
-//-------------------------
-// Tehtävien merkitseminen
-//-------------------------
+        todo[index].ready = !todo[index].ready;
 
-//Jos klikataan tehtävää, se merkitään tehdyksi
-listapohja.addEventListener('click', function(teht){
-    if (teht.target.tagName === "LI") {
-        teht.target.classList.toggle("valmis");
-
+        listItem.classList.toggle("valmis");
+        console.log("Tehtävän tila muuttunut");
         tallenna();
-        console.log("Tehtävän tila on muuttunut");
-    }
-// Jos klikataan ruksia, se poistetaan välimuistista ja soitetaan äänimerkki
-    else if (teht.target.tagName === "SPAN"){
-        teht.target.parentElement.remove();
-        merkkiaani('gallery/audio/Wood.mp3')
+
+    } else if (target.tagName === "SPAN") {
+        // Poista tehtävä
+        const listItem = target.parentElement;
+        const index = Array.from(tehtavapohja.children).indexOf(listItem);
+
+        // Poistetaan tiedot
+        todo.splice(index, 1);
+        listItem.remove();
+
         tallenna();
         console.log("Tehtävä poistettu");
     }
 }, false);
 
-// Extra: Muokkaa tehtävää
 
-//--------
-// Extra
-//--------
+// Poistonappi
+function poistoNappi() {
+    const li = document.createElement("li");
+    li.textContent = tehtavaInput.value;
+
+    const del = document.createElement("span");
+    del.innerHTML = "❌";
+    li.appendChild(del);
+
+    tehtavapohja.appendChild(li);
+}
+
+// Tuodaan tehtävät takaisin sivulle välimuistista
+function tuoTehtavat() {
+    // Tyhjennetään lista, ei haluta dublikaatteja
+    tehtavapohja.innerHTML = '';
+
+    //Lisätään järjestyksessä lista takaisin sivulle
+    todo.forEach(function(task) {
+        const li = document.createElement("li");
+        li.textContent = task.nimi;
+
+        // Poistonappi
+        const del = document.createElement("span");
+        del.innerHTML = "❌";
+        li.appendChild(del);
+
+        // Jos tehtävä tehty, merkataan valmiiksi
+        if (task.ready) {
+            li.classList.add("valmis");
+        }
+
+        tehtavapohja.appendChild(li);
+        console.warn("Tehtava palautettu välimuistista!");
+    });
+}
+
+// Tallennus välimuistiin
+function tallenna() {
+    localStorage.setItem("MatoMissio", JSON.stringify(todo));
+}
+
+// Tyhjennä koko sivu
+function forgetMe() {;
+    alert("Nollataan sivu...");
+    localStorage.clear();
+    location.reload()
+}
 
 // Ilmoitetaan ettei kirjautuminen onnistu.
 function login() {
     alert("Jotain meni vikaan, yritä myöhemmin uudelleen!");
 }
 
-// Hampparimenu! :D
-// Avautuu vain puhelimella klikkaamalla logoa, muuten heittää vain tekstiä konsoliin
+// Hampparimenu! :D, vain puhelimelle, muuten heittää varoitusta konsoliin.
 function openMenu() {
     var navbar = document.getElementById('navbar');
 
@@ -102,16 +138,13 @@ function openMenu() {
         merkkiaani('/gallery/audio/Cartoon.mp3');
     }
     else {
-        console.log("Här är Gilbert");
+        console.warn("Jätä Gilbert rauhaan!");
     }
 }
 
-// Lisätään merkkiäänimahdollisuuksia, koska miksi ei...
+// Merkkiäänet
 function merkkiaani(polku) {
     var merkki = new Audio(polku)
     merkki.loop = false;
     merkki.play();
 }
-
-// Täällä lopussa ajetaan komento lukea välimuistista tehtävät
-tehtavamuisti();
