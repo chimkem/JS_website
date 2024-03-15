@@ -174,7 +174,7 @@ footer {
 }
 
 input {
-    flex: 2;
+    width: 100%;
     border: none;
     background: transparent;
     outline: none;
