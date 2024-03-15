@@ -18,7 +18,7 @@
 </head>
 <header>
     <nav> 
-        <img src="gallery/gilbert.png" alt="verkkosivun logo" class="logokuvake" id="ikoni" onclick="playSound(), openMenu()">
+        <img src="gallery/gilbert.png" alt="verkkosivun logo" class="logokuvake" id="ikoni" onclick="openMenu()">
         <ul class="navi" id="navbar">
             <li><a href="#Etusivu">Etusivut</a></li>
             <li><a href="#MatoMissio" class="aktiv">MatoMissio™</a></li> <!--Annetaan illuusio, että oltaisiin tällä sivulla-->
@@ -37,16 +37,17 @@
         </div>
 
         <div class="lista">
-            <div class="rivi">
+            <div class="inputrivi">
                 <input type="text" id="tehtava" placeholder="Anna tehtävä...">
-                <button id="addbtn" onclick="lisaa()">Lisää</button>
+                <button class="btn" id="addbtn" onclick="lisaa()">Lisää</button>
             </div>
-
-            <ul class="tpohja" id="tehtavapohja">
-                <!--<li class="valmis">Tehtävä 1</li>
-                <li>Tehtävä 2</li>
-                <li>Tehtävä 3</li>-->
-            </ul>
+            <div class="tpohja">
+                <ul id="tehtavapohja">
+                    <!--<li class="valmis">Tehtävä 1</li>
+                    <li>Tehtävä 2</li>
+                    <li>Tehtävä 3</li>-->
+                </ul>
+            </div>
         </div>
     </div>
     <!--Linkataan oma JSscriptitiedosto-->
