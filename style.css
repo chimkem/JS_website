@@ -5,42 +5,41 @@ body {
     display: flex;
     flex-direction: column;
     height: 100vh;
+    color: #371f18;
 }
-.contentti {
+.tausta {
     flex: 1;
 }
 .info {
     border: 2px solid #371f18;
-    background: linear-gradient(#dde8ae, #9bb83d);
+    background: linear-gradient(#d5f383, #679436);
     width: 90%;
     height: max-content;
     margin: 10px auto 10px;
     padding: 30px;
     border-radius: 30px;
     text-align: center;
-    color: #371f18;
 }
 .info h1 {
     font-weight: bold;
-    font-size: larger;
+    font-size: 30px;
     padding-top: 20px;
 }
 .lista {
     border: 2px solid #371f18;
-    background: linear-gradient(#dde8ae, #9bb83d);
+    background: linear-gradient(#d5f383, #679436);
     width: 90%;
-    max-height: 650px;
     margin: 5px auto 10px;
     padding: 30px;
     border-radius: 30px;
-    color: #371f18;
 }
 
-
-/* Lisätään responsiivisuutta */
+/* --------------- */
+/* Responsiivisuus */
+/* --------------- */
 
 /* MOBIILI */
-@media (max-width: 769px) {
+@media (max-width: 770px) {
     nav li {
         display:inline-block;
         text-align: center;
@@ -51,8 +50,11 @@ body {
         margin-left: auto;
         margin-right: auto;
         width: auto;
-        height: 60px;
+        height: 70px;
         transform: scaleX(-1);
+        background-image: url(gallery/gilbert_mobile.svg);
+        background-size: cover;
+        cursor: copy;
     }
     nav .navi {
         height: 80px;
@@ -75,7 +77,7 @@ body {
     }
 }
 /* PC */
-@media (min-width: 770px) {
+@media (min-width: 771px) {
     nav li {
         display:inline;
         float: left;
@@ -86,7 +88,6 @@ body {
         float: left;
         width: auto;
         height: 50px;
-        cursor: not-allowed;
     }
 
     nav a {
@@ -106,8 +107,9 @@ body {
         overflow-x: hidden;
     }
 }
-
-/*Navigointi*/
+/* ---------- */
+/* Navigointi */
+/* ---------- */
 nav {
     overflow: hidden;
     padding: 10px 10px;
@@ -142,7 +144,9 @@ nav a {
     color: #faf6f0;
 }
 
-
+/* ---- */
+/* Muut */
+/* ---- */
 
 /* Napit */
 .btn {
@@ -188,8 +192,12 @@ footer {
     padding: 15px;
 }
 
-/*ToDo Tekstikenttä*/
+/* ---- */
+/* ToDo */
+/* ---- */
 
+
+/*Tekstikenttä*/
 .tekstikentta {
     display: flex;
     padding: 10px;
@@ -201,19 +209,16 @@ footer {
     margin-bottom: 20px;
     height: fit-content;
 }
-
 input {
     width: 100%;
     border: none;
     background: transparent;
     outline: none;
 }
-
 input::placeholder {
     color: #faf6f0;
 }
-
-/* Tehtävät listaan */
+/* Lista */
 ul li span {
     position: absolute;
     right: 12px;
@@ -227,7 +232,6 @@ ul li span {
 ul li span:hover {
     background: #ec7166;
 }
-
 li {
     list-style: none;
     font-size: 20px;
@@ -235,32 +239,28 @@ li {
     cursor: pointer;
     padding: 12px 8px 12px 50px;
     position: relative;
-    color: #faf6f0;
+    color:#faf6f0;
 }
-
 li::before {
     content: '';
     position: absolute;
-    height: 25px;
-    width: 25px;
+    height: 30px;
+    width: 30px;
     background-image: url(gallery/unchecked.svg);
     background-size: cover;
     background-position: center;
-    top: 15px;
-    left: 5px;
+    top: 10px;
+    left: 2px;
 }
-
 li.valmis {
-    color: #4bb83d;
+    color: #344b1b;
     text-decoration: line-through;
 }
-
 li.valmis::before {
     background-image: url(gallery/checked.svg);
 }
 
 /*Scrollbar tehtävälistalle */
-
 .tpohja::-webkit-scrollbar {
     width: 13px;
 }
@@ -269,7 +269,7 @@ li.valmis::before {
     background: #8b584a;;
 }
 .tpohja::-webkit-scrollbar-thumb {
-    background: linear-gradient(#dde8ae, #9bb83d); 
+    background: linear-gradient(#d5f383, #679436); 
     border-radius: 10px;
     border: 1px solid #5e2f29;;
 }

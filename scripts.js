@@ -6,9 +6,10 @@ const tehtavapohja = document.getElementById('tehtavapohja');  // Pohja
 const tehtavaInput = document.getElementById('tehtavanimi'); // Tekstikenttä
 const addBtn = document.querySelector(".btn");
 
-// ladataan aiemmat mahdolliset tehtävät
+// ladataan aiemmat mahdolliset tehtävät ja esitetään ne konsolissa
 window.onload = function() {
     tuoTehtavat();
+    console.log(todo);
 };
 
 //----------------------------
@@ -19,11 +20,11 @@ window.onload = function() {
 //----------------------------
 function uusiTehtava() {
     const uusi = tehtavaInput.value.trim();
-    // Jos tehtäväkentässä on yli 3 kirjainta, lisätään tehtävä listaan.
-    if (uusi.length > 3) {
+    // Jos tehtäväkentässä on yli 2 kirjainta, lisätään tehtävä listaan.
+    if (uusi.length > 2) {
         todo.push({
             nimi: uusi,
-            ready: false
+            valmis: false
         });
 
         poistoNappi();
@@ -41,7 +42,7 @@ function uusiTehtava() {
             tehtavaInput.style.border = "";
         }, 2000);
 
-        console.error("Tyhjä kenttä tai liian lyhyt teksti!");
+        console.log("Tyhjä kenttä tai liian lyhyt teksti!");
     }
 }
 // Tehtävien merkkaaminen ja poistaminen listalta
@@ -51,23 +52,25 @@ tehtavapohja.addEventListener('click', function(event) {
 
     if (target.tagName === "LI") {
         // Merkataan onko tehtävä tehty, default=false
-        const listItem = target;
-        const index = Array.from(tehtavapohja.children).indexOf(listItem);
+        const tehtava = target;
+        const tieto = Array.from(tehtavapohja.children).indexOf(tehtava);
 
-        todo[index].ready = !todo[index].ready;
+        todo[tieto].valmis = !todo[tieto].valmis;
 
-        listItem.classList.toggle("valmis");
+        // CSS & Äänimerkki
+        tehtava.classList.toggle("valmis");
+        merkkiaani('gallery/audio/Wood.mp3')
         console.log("Tehtävän tila muuttunut");
         tallenna();
 
     } else if (target.tagName === "SPAN") {
         // Poista tehtävä
-        const listItem = target.parentElement;
-        const index = Array.from(tehtavapohja.children).indexOf(listItem);
+        const tehtava = target.parentElement;
+        const tieto = Array.from(tehtavapohja.children).indexOf(tehtava);
 
         // Poistetaan tiedot
-        todo.splice(index, 1);
-        listItem.remove();
+        todo.splice(tieto, 1);
+        tehtava.remove();
 
         tallenna();
         console.log("Tehtävä poistettu");
@@ -80,35 +83,38 @@ function poistoNappi() {
     const li = document.createElement("li");
     li.textContent = tehtavaInput.value;
 
+    // Poistonappi tehtävien perään
     const del = document.createElement("span");
     del.innerHTML = "❌";
     li.appendChild(del);
 
+    // Tehtävät listaan
     tehtavapohja.appendChild(li);
 }
 
-// Tuodaan tehtävät takaisin sivulle välimuistista
+// Tuo Tehtavat
 function tuoTehtavat() {
     // Tyhjennetään lista, ei haluta dublikaatteja
     tehtavapohja.innerHTML = '';
 
-    //Lisätään järjestyksessä lista takaisin sivulle
-    todo.forEach(function(task) {
+    //Lisätään järjestyksessä lista takaisin sivulle näkyville
+    todo.forEach(function(tehtava) {
         const li = document.createElement("li");
-        li.textContent = task.nimi;
+        li.textContent = tehtava.nimi;
 
-        // Poistonappi
+        // Poistonappi tehtävien perään
         const del = document.createElement("span");
         del.innerHTML = "❌";
         li.appendChild(del);
 
-        // Jos tehtävä tehty, merkataan valmiiksi
-        if (task.ready) {
+        // Jos tehtävä jo tehty, näytetään valmiina
+        if (tehtava.valmis) {
             li.classList.add("valmis");
         }
 
+        // Tehtävät listaan ja konsoliin logia
         tehtavapohja.appendChild(li);
-        console.warn("Tehtava palautettu välimuistista!");
+        console.log("Tiedot palautettu välimuistista");
     });
 }
 
@@ -117,14 +123,14 @@ function tallenna() {
     localStorage.setItem("MatoMissio", JSON.stringify(todo));
 }
 
-// Tyhjennä koko sivu
+// "Unohda minut" -toiminto
 function forgetMe() {;
     alert("Nollataan sivu...");
     localStorage.clear();
-    location.reload()
+    location.reload();
 }
 
-// Ilmoitetaan ettei kirjautuminen onnistu.
+// Ilmoitetaan, ettei voi kirjautua
 function login() {
     alert("Jotain meni vikaan, yritä myöhemmin uudelleen!");
 }
@@ -142,7 +148,7 @@ function openMenu() {
     }
 }
 
-// Merkkiäänet
+// Merkkiääni toiminto
 function merkkiaani(polku) {
     var merkki = new Audio(polku)
     merkki.loop = false;
